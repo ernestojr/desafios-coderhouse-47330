@@ -1,0 +1,19 @@
+{
+  "name": "get-current-date",
+  "version": "1.0.0",
+  "description": "Obtener la fecha actual",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "date",
+    "npm",
+    "today"
+  ],
+  "author": "Coder House",
+  "license": "MIT",
+  "dependencies": {
+    "dayjs": "^1.11.10"
+  }
+}
