@@ -1,0 +1,15 @@
+npm i dayjs
+
+npm outdated
+
+npm i dayjs@1.0.0 # recuerda quita el circunflejo 
+
+npm outdated
+
+npm update
+
+# Prueba la actualizacion con la tilde de e#e
+
+npm update
+
+# Prueba la actualizacion con el circunflejo

@@ -1,0 +1,12 @@
+{
+  "name": "http-demo",
+  "version": "1.0.0",
+  "description": "This is a demo for http server.",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": ["http", "server"],
+  "author": "Coder House",
+  "license": "MIT"
+}
