@@ -1,0 +1,17 @@
+{
+  "name": "activity-01",
+  "version": "1.0.0",
+  "description": "Activity 01.",
+  "type": "module",
+  "main": "app.js",
+  "scripts": {
+    "start": "node .",
+    "dev": "nodemon ."
+  },
+  "keywords": [],
+  "author": "Coder House",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
