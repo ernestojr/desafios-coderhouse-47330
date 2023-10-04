@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css">
+    <title>Incio</title>
+  </head>
+  <body>
+    <main class="container">
+      <h1>Incio</h1>
+      <h2>Agregar mascota</h2>
+      <form action="/api/pets" method="post">
+        <input type="text" name="name" required placeholder="Nombre"/>
+        <input type="text" name="race" required placeholder="Raza"/>
+        <input type="text" name="age" required placeholder="Edad"/>
+        <button type="submit">Enviar</button>
+      </form>
+    </main>
+  </body>
+</html>
