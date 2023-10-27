@@ -1,0 +1,22 @@
+<h1>Estudiantes</h1>
+
+<table id="main">
+  <tr>
+    <th>Nombre</th>
+    <th>Apellido</th>
+    <th>Edad</th>
+    <th>Correo</th>
+    <th>Curso</th>
+    <th>Nota</th>
+  </tr>
+  {{#each students}}
+    <tr>
+      <td>{{this.firstName}}</td>
+      <td>{{this.lastName}}</td>
+      <td>{{this.age}}</td>
+      <td>{{this.email}}</td>
+      <td>{{this.course}}</td>
+      <td>{{this.grade}}</td>
+    </tr>
+  {{/each}}
+</table>
