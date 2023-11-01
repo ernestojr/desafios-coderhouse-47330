@@ -1,22 +1,35 @@
 <h1>Estudiantes</h1>
-
-<table id="main">
-  <tr>
-    <th>Nombre</th>
-    <th>Apellido</th>
-    <th>Edad</th>
-    <th>Correo</th>
-    <th>Curso</th>
-    <th>Nota</th>
-  </tr>
-  {{#each students}}
+<article>
+  <form action="/api/students" method="post" enctype="multipart/form-data">  
+    <input type="text" name="firstName" placeholder="Nombre" required>
+    <input type="text" name="lastName" placeholder="Apellido" required>
+    <input type="text" name="age" placeholder="Edad" required>
+    <input type="text" name="email" placeholder="Correo" required>
+    <input type="text" name="course" placeholder="Curso" required>
+    <input type="number" name="grade" placeholder="Calificación" required>
+    <input type="file" name="avatar" placeholder="Avatar" required>
+    <input type="submit" value="Guardar">
+  </form>
+</article>
+<article>
+  <table id="main">
     <tr>
-      <td>{{this.firstName}}</td>
-      <td>{{this.lastName}}</td>
-      <td>{{this.age}}</td>
-      <td>{{this.email}}</td>
-      <td>{{this.course}}</td>
-      <td>{{this.grade}}</td>
+      <th>Nombre</th>
+      <th>Apellido</th>
+      <th>Edad</th>
+      <th>Correo</th>
+      <th>Curso</th>
+      <th>Nota</th>
     </tr>
-  {{/each}}
-</table>
+    {{#each students}}
+      <tr>
+        <td>{{this.firstName}}</td>
+        <td>{{this.lastName}}</td>
+        <td>{{this.age}}</td>
+        <td>{{this.email}}</td>
+        <td>{{this.course}}</td>
+        <td>{{this.grade}}</td>
+      </tr>
+    {{/each}}
+  </table>
+</article>

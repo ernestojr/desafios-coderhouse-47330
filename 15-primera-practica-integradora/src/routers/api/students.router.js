@@ -1,7 +1,10 @@
 import { Router } from 'express';
 import StudentManager from '../../dao/StudentManager.js';
+import { uploader } from '../../utils.js';
 
 const router = Router();
+
+const URL_BASE = 'http://localhost:8080/avatars';
 
 router.get('/students', async (req, res) => {
   const { query = {} } = req;
@@ -19,9 +22,13 @@ router.get('/students/:sid', async (req, res) => {
   }
 });
 
-router.post('/students', async (req, res) => {
-  const { body } = req;
-  const student = await StudentManager.create(body);
+router.post('/students', uploader.single('avatar'), async (req, res) => {
+  const { body, file } = req;
+  const newStudent = { ...body };
+  if (file) {
+    newStudent.avatar = `${URL_BASE}/${file.filename}`;
+  }
+  const student = await StudentManager.create(newStudent);
   res.status(201).json(student);
 });
 
