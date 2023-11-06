@@ -1,0 +1,19 @@
+{
+  "name": "hands-on-lab",
+  "version": "1.0.0",
+  "description": "Hands On Lab",
+  "main": "src/server.js",
+  "type": "module",
+  "scripts": {
+    "start": "node .",
+    "dev": "nodemon ."
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2",
+    "express-handlebars": "^7.1.2",
+    "mongoose": "^8.0.0",
+    "mongoose-paginate-v2": "^1.7.31"
+  }
+}

@@ -1,0 +1,27 @@
+<h1>Estudiantes</h1>
+
+<table id="main" role="grid">
+  <tr>
+    <th>Nombre</th>
+    <th>Apellido</th>
+    <th>Correo</th>
+    <th>Genero</th>
+    <th>Calificación</th>
+    <th>grupo</th>
+  </tr>
+  {{#each payload}}
+    <tr>
+      <td>{{this.first_name}}</td>
+      <td>{{this.last_name}}</td>
+      <td>{{this.email}}</td>
+      <td>{{this.gender}}</td>
+      <td>{{this.grade}}</td>
+      <td>{{this.group}}</td>
+    </tr>
+  {{/each}}
+</table>
+
+<p>Página actual: {{page}}</p>
+
+<a href="{{prevLink}}" role="button" {{#unless hasPrevPage}}disabled{{/unless}} >Anterior</a>
+<a href="{{nextLink}}" role="button" {{#unless hasNextPage}}disabled{{/unless}} >Siguiente</a>
