@@ -3,7 +3,6 @@ import { fileURLToPath } from 'url';
 import passport from 'passport';
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
-import { info } from 'console';
 
 export const JWT_SECRET = 'qBvPkU2X;J1,51Z!~2p[JW.DT|g:4l@';
 
@@ -16,14 +15,15 @@ export const createHash = (password) => bcrypt.hashSync(password, bcrypt.genSalt
 export const isValidPassword = (password, user) => bcrypt.compareSync(password, user.password);
 
 export const tokenGenerator = (user) => {
-  const { _id, first_name, last_name, email } = user;
+  const { _id, first_name, last_name, email, role } = user;
   const payload = {
     id: _id,
     first_name,
     last_name,
-    email
+    email,
+    role
   };
-  return jwt.sign(payload, JWT_SECRET, { expiresIn: '10s' });
+  return jwt.sign(payload, JWT_SECRET, { expiresIn: '1m' });
 };
 
 export const verifyToken = (token) => {
@@ -37,7 +37,7 @@ export const verifyToken = (token) => {
   });
 }
 
-export const authMiddleware = (strategy) => (req, res, next) => {
+export const authenticationMiddleware = (strategy) => (req, res, next) => {
   passport.authenticate(strategy, function(error, payload, info) {
     if (error) {
       return next(error);
@@ -49,3 +49,15 @@ export const authMiddleware = (strategy) => (req, res, next) => {
     next();
   })(req, res, next);
 };
+
+export const authorizationMiddleware = (roles) => (req, res, next) => {
+  if (!req.user) {
+    return res.status(401).json({ message: 'Unauthorized' });
+  }
+
+  const {role: userRole} = req.user;
+  if (!roles.includes(userRole)) {
+    return res.status(403).json({ message: 'No premissions' });
+  }
+  next();
+}
