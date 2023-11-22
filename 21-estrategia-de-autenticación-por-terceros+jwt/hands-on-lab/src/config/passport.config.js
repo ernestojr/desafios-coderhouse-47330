@@ -1,4 +1,5 @@
 import passport from 'passport';
+import fetch from 'node-fetch';
 import { Strategy as LocalStrategy } from 'passport-local';
 import { Strategy as GithubStrategy } from 'passport-github2';
 import { createHash, isValidPassword } from '../utils.js';
@@ -50,7 +51,18 @@ export const init = () => {
 
   passport.use('github', new GithubStrategy(githubOpts, async (accessToken, refreshToken, profile, done) => {
     console.log('profile', profile);
-    const email = profile._json.email;
+    let email = profile._json.email;
+    /* if (!email) { 
+      let data = await fetch('https://api.github.com/user/public_emails', {
+        headers: {
+          Authorization: `token ${accessToken}`,
+        },
+      });
+      data = await data.json();
+      console.log('data', data);
+      const target = data.find((item) => item.primary && item.verified && item.visibility === 'public');
+      email = target.email;
+    } */
     let user = await UserModel.findOne({ email });
     if (user) {
       return done(null, user);
