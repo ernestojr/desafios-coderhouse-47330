@@ -8,7 +8,7 @@ import { __dirname } from './utils.js';
 
 const app = express();
 
-const URI = 'mongodb+srv://developer:EP2dJ1E10aQmWh3H@cluster0.wzpvdnu.mongodb.net/sessions'
+const URI = 'mongodb://localhost:27017/sessions'
 
 const SESSION_SECRET = 'qBvPkU2X;J1,51Z!~2p[JW.DT|g:4l@';
 

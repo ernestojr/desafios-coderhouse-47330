@@ -1,33 +1,22 @@
 import express from 'express';
-import expressSession from 'express-session';
+import handlebars from 'express-handlebars';
 import path from 'path';
-import MongoStore from 'connect-mongo';
 
-import indexRouter from './routers/index.router.js';
+import indexRouter from './routers/views/index.router.js';
+import usersRouter from './routers/api/users.router.js';
 import { __dirname } from './utils.js';
 
 const app = express();
 
-const URI = 'mongodb://localhost:27017/sessions'
-
-const SESSION_SECRET = 'qBvPkU2X;J1,51Z!~2p[JW.DT|g:4l@';
-
-app.use(expressSession({
-  secret: SESSION_SECRET,
-  resave: false,
-  saveUninitialized: false,
-  store: MongoStore.create({
-    mongoUrl: URI,
-    mongoOptions: {},
-    //ttl: 20,
-  }), 
-}));
-
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, '../public')));
+app.engine('handlebars', handlebars.engine());
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'handlebars');
 
 app.use('/', indexRouter);
+app.use('/api', usersRouter);
 
 app.use((error, req, res, next) => {
   const message = `Ah ocurrido un error desconocido 😨: ${error.message}`;

@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 
-export const URI = 'mongodb+srv://developer:EP2dJ1E10aQmWh3H@cluster0.wzpvdnu.mongodb.net/ecommerce?retryWrites=true&w=majority';
+export const URI = 'mongodb://localhost:27017/ecommerce';
 
 export const init = async () => {
   try {
