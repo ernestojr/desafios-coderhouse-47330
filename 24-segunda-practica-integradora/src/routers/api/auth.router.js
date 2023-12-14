@@ -1,39 +1,18 @@
 import { Router } from 'express';
 import UserModel from '../../models/user.model.js';
+import AuthController from '../../controllers/auth.controller.js';
+
 import { createHash, verifyPassword, tokenGenerator } from '../../utils.js';
 
 const router = Router();
 
 router.post('/auth/register', async (req, res) => {
-  const {
-    first_name,
-    last_name,
-    dni,
-    email,
-    password,
-  } = req.body;
-  if (
-    !first_name ||
-    !last_name ||
-    !dni ||
-    !email ||
-    !password
-  ) {
-    return res.status(400).json({ message: 'Todos los campos son requeridos 😨' });
+  try {
+    const user = await AuthController.register(req.body);
+    res.status(201).json({ message: 'Usuario creado correctamente 👽' });
+  } catch(error) {
+    res.status(400).json({ message: error.message });
   }
-  let user = await UserModel.findOne({ email });
-  if (user) {
-    return res.status(400).json({ message: 'Correo ya registrado 😨. Intenta recuperar tu contraseña 😁.' });
-  }
-  user = await UserModel.create({
-    first_name,
-    last_name,
-    dni,
-    email,
-    password: createHash(password),
-  });
-
-  res.status(201).json({ message: 'Usuario creado correctamente 👽' });
 });
 
 router.post('/auth/login', async (req, res) => {
