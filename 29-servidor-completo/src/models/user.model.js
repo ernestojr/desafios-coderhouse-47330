@@ -1,10 +1,13 @@
 import mongoose, { Schema } from 'mongoose';
 
 const userSchema = new Schema({
-  first_name: { type: String, required: true },
-  last_name: { type: String, required: true },
+  name: { type: String, required: true },
   email: { type: String, required: true, unique: true },
-  gender: { type: String, required: false },
+  role: { type: String, default: 'user', enum: ['user', 'admin'] },
+  orders: { type: [{
+    type: mongoose.SchemaType.ObjectId,
+    ref: 'Orders',
+  }], default: [] },
 }, { timestamps: true });
 
-export default mongoose.model('User', userSchema);
+export default mongoose.model('Users', userSchema);

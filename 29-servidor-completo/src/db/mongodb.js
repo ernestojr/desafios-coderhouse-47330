@@ -1,8 +1,10 @@
 import mongoose from 'mongoose';
 
+import config from '../config/config.js';
+
 export const init = async () => {
   try {
-    const URI = 'mongodb+srv://developer:EP2dJ1E10aQmWh3H@cluster0.wzpvdnu.mongodb.net/marketplace';
+    const URI = config.mongodbUri;
     await mongoose.connect(URI);
     console.log('Database connected 🚀');
   } catch (error) {
