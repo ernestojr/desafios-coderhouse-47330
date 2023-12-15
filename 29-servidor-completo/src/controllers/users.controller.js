@@ -1,18 +1,25 @@
+import UserService from '../dao/user.mongodb.dao.js';
+
+import { NotFoundException } from '../utils.js';
+
 export default class UsersController {
-  static getAll = async () => {
-    console.log('method getAll called 👽');
-    return 'method getAll called 👽';
+  static getAll = () => {
+   return UserService.getAll();
   };
-  static create = async (data) => {
-    console.log('method create called 👽');
-    return 'method create called 👽';
+
+  static create = (data) => {
+    return UserService.create(data);
   };
-  static getById = async (oid) => {
-    console.log('method getById called 👽');
-    return 'method getById called 👽';
+
+  static getById = async (uid) => {
+    const user = await UserService.getById(uid);
+    if (!user) {
+      throw new NotFoundException('Not found');
+    }
+    return user;
   };
-  static updateById = async (oid, data) => {
-    console.log('method updateById called 👽');
-    return 'method updateById called 👽';
+
+  static updateById = (uid, data) => {
+    return UserService.updateById(uid, data);
   };
 }

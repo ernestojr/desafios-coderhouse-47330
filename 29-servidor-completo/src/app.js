@@ -6,7 +6,7 @@ import indexRouter from './routers/views/index.router.js';
 import usersRouter from './routers/api/users.router.js';
 import businessRouter from './routers/api/business.router.js';
 import ordersRouter from './routers/api/orders.router.js';
-import { __dirname } from './utils.js';
+import { Exception, __dirname } from './utils.js';
 
 const app = express();
 
@@ -23,9 +23,13 @@ app.use('/api/business', businessRouter);
 app.use('/api/orders', ordersRouter);
 
 app.use((error, req, res, next) => {
-  const message = `Ah ocurrido un error desconocido 😨: ${error.message}`;
-  console.log(message);
-  res.status(500).json({ status: 'error', message });
+  if (error instanceof Exception) {
+    res.status(error.status).json({ status: 'error', message: error.message });
+  } else {
+    const message = `Ah ocurrido un error desconocido 😨: ${error.message}`;
+    console.log(message);
+    res.status(500).json({ status: 'error', message });
+  }
 });
 
 export default app;

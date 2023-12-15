@@ -1,18 +1,32 @@
+import BusinessService from '../dao/business.mongodb.dao.js';
+
+import { NotFoundException } from '../utils.js';
+
 export default class BusinessController {
-  static getAll = async () => {
-    console.log('method getAll called 👽');
-    return 'method getAll called 👽';
+  static getAll = () => {
+    return BusinessService.getAll();
   };
-  static create = async (data) => {
-    console.log('method create called 👽');
-    return 'method create called 👽';
+
+  static create = (data) => {
+    return BusinessService.create(data);
   };
-  static getById = async (oid) => {
-    console.log('method getById called 👽');
-    return 'method getById called 👽';
+
+  static addProduct = async (bid, data) => { // { id: 1, name: 'pizza', price: 12.34 }
+    const business = await BusinessController.getById(bid);
+    await BusinessController.updateById(bid, {
+      products: [...business.products, data],
+    });
   };
-  static updateById = async (oid, data) => {
-    console.log('method updateById called 👽');
-    return 'method updateById called 👽';
+
+  static getById = async (bid) => {
+    const business = await BusinessService.getById(bid);
+    if (!business) {
+      throw new NotFoundException('Not found');
+    }
+    return business;
+  };
+
+  static updateById = (bid, data) => {
+    return BusinessService.updateById(bid, data);
   };
 }

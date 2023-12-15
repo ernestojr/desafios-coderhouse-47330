@@ -6,18 +6,18 @@ const router = Router();
 
 router.get('/', async (req, res, next) => {
   try {
-    const orders = await UsersController.getAll();
-    res.status(200).json({ message: orders });
+    const users = await UsersController.getAll();
+    res.status(200).json(users);
   } catch (error) {
     next(error);
   }
 });
 
-router.get('/:oid', async (req, res, next) => {
+router.get('/:uid', async (req, res, next) => {
   try {
-    const { params: { oid } } = req;
-    const order = await UsersController.getById(oid);
-    res.status(200).json({ message: order });
+    const { params: { uid } } = req;
+    const user = await UsersController.getById(uid);
+    res.status(200).json(user);
   } catch (error) {
     next(error);
   }
@@ -26,18 +26,18 @@ router.get('/:oid', async (req, res, next) => {
 router.post('/', async (req, res, next) => {
   try {
     const { body } = req;
-    const order = await UsersController.create(body);
-    res.status(201).json({ message: order });
+    const user = await UsersController.create(body);
+    res.status(201).json(user);
   } catch (error) {
     next(error);
   }
 });
 
-router.put('/:oid', async (req, res, next) => {
+router.put('/:uid', async (req, res, next) => {
   try {
-    const { params: { oid }, body } = req;
-    await UsersController.updateById(oid, body);
-    res.status(204).json({ message: order });
+    const { params: { uid }, body } = req;
+    await UsersController.updateById(uid, body);
+    res.status(204).end();
   } catch (error) {
     next(error);
   }
