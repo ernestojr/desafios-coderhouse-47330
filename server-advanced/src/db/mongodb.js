@@ -1,8 +1,9 @@
 import mongoose from 'mongoose';
+import config from '../config/config';
 
 export const init = async () => {
   try {
-    const URI = 'mongodb://localhost:27017/school';
+    const URI = config.MONGO_URI;
     await mongoose.connect(URI);
     console.log('Database connected 🚀');
   } catch (error) {
