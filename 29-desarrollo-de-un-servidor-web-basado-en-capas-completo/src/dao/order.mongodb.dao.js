@@ -1,19 +1,19 @@
 import OrderModel from "../models/order.model.js";
 
 export default class OrderDao {
-  getAll = () => {
+  static getAll = () => {
     return OrderModel.find();
   }
-  getById = (uid) => {
+  static getById = (uid) => {
     return OrderModel.findById(uid);
   }
-  create = (data) => {
+  static create = (data) => {
     return OrderModel.create(data);
   }
-  updateById = (uid, data) => {
+  static updateById = (uid, data) => {
     return OrderModel.updateOne({ _id: uid }, { $set: data });
   }
-  deleteById = (uid) => {
+  static deleteById = (uid) => {
     return OrderModel.deleteOne({ _id: uid });
   }
 }

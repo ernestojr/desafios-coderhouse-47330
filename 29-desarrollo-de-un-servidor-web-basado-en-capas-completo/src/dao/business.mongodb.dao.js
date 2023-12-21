@@ -1,19 +1,19 @@
 import BusinessModel from "../models/business.model.js";
 
 export default class OrderDao {
-  getAll = () => {
+  static getAll = () => {
     return BusinessModel.find();
   }
-  getById = (uid) => {
+  static getById = (uid) => {
     return BusinessModel.findById(uid);
   }
-  create = (data) => {
+  static create = (data) => {
     return BusinessModel.create(data);
   }
-  updateById = (uid, data) => {
+  static updateById = (uid, data) => {
     return BusinessModel.updateOne({ _id: uid }, { $set: data });
   }
-  deleteById = (uid) => {
+  static deleteById = (uid) => {
     return BusinessModel.deleteOne({ _id: uid });
   }
 }
