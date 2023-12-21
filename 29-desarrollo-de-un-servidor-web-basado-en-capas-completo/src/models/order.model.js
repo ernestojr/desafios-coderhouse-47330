@@ -15,4 +15,8 @@ const orderSchema = new Schema({
   status: { type: String, default: 'pending', enum: ['pending', 'completed', 'cancelled'] },
 }, { timestamps: true });
 
+orderSchema.pre('find', function() {
+  this.populate('business', 'name').populate('user');
+});
+
 export default mongoose.model('Orders', orderSchema);

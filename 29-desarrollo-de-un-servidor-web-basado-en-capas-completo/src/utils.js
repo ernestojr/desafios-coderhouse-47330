@@ -1,9 +1,23 @@
 import path from 'path';
 import { fileURLToPath } from 'url';
+import jwt from 'jsonwebtoken';
 
 const __filename = fileURLToPath(import.meta.url);
 
 export const __dirname = path.dirname(__filename);
+
+export const JWT_SECRET = 'qBvPkU2X;J1,51Z!~2p[JW.DT|g:4l@';
+
+export const tokenGenerator = (user) => {
+  const { _id, first_name, last_name, email } = user;
+  const payload = {
+    id: _id,
+    first_name,
+    last_name,
+    email
+  };
+  return jwt.sign(payload, JWT_SECRET, { expiresIn: '10s' });
+};
 
 
 export class Exception extends Error {

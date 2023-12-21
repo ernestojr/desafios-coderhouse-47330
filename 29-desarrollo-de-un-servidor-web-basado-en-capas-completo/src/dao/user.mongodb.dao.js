@@ -1,8 +1,8 @@
 import UserModel from "../models/user.model.js";
 
 export default class UserDao {
-  static getAll = () => {
-    return UserModel.find();
+  static getAll = (criteria = {}) => {
+    return UserModel.find(criteria);
   }
   static getById = (uid) => {
     return UserModel.findById(uid);

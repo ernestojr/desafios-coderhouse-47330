@@ -3,7 +3,6 @@ import { fileURLToPath } from 'url';
 import passport from 'passport';
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
-import { info } from 'console';
 
 export const JWT_SECRET = 'qBvPkU2X;J1,51Z!~2p[JW.DT|g:4l@';
 
