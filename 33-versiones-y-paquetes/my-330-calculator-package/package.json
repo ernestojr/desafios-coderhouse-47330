@@ -1,0 +1,19 @@
+{
+  "name": "my-330-calculator-package",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "node ./tests/index.test.js"
+  },
+  "keywords": [],
+  "author": "",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ernestorojasteacher/my-330-calculator-package"
+  },
+  "bugs": {
+    "url": "https://github.com/ernestorojasteacher/my-330-calculator-package/issues"
+  },
+  "license": "ISC"
+}
