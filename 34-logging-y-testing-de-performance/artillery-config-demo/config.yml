@@ -1,0 +1,38 @@
+config:
+  plugins:
+    metrics-by-endpoint: {}
+  target: 'http://localhost:8080'
+  phases:
+    - duration: 20
+      arrivalRate: 10
+
+scenarios:
+  - name: 'Create an user and get by id'
+    flow:
+      - log: 'Obtenemos el usuario faker'
+      - get:
+          url: '/api/users/faker'
+          capture:
+            - json: "$.first_name"
+              as: "primer_nombre"
+            - json: "$.last_name"
+              as: "last_name"
+            - json: "$.email"
+              as: "email"
+            - json: "$.age"
+              as: "age"
+      - log: 'Crear un nuevo usuario'
+      - post:
+          url: '/api/users'
+          json:
+            first_name: '{{ primer_nombre }}'
+            last_name: '{{ last_name }}'
+            email: '{{ email }}'
+            age: '{{ age }}'
+          capture:
+            - json: "$._id"
+              as: "id"
+      - think: 2
+      - log: 'Obtener usuario por id'
+      - get:
+          url: '/api/users/{{ id }}'
