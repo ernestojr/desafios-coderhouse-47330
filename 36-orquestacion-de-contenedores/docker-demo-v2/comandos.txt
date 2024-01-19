@@ -1,0 +1,17 @@
+kubectl apply -f kubeusers.yaml
+
+kubectl get deployments
+
+kubectl get pods
+
+kubectl get services
+
+minikube service list
+
+minikube service kubeservice
+
+kubectl delete -f kubeusers.yaml
+
+minikube stop
+
+minikube delete
