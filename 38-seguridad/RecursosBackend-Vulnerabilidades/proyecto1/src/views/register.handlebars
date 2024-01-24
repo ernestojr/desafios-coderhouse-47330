@@ -1,0 +1,10 @@
+<div>
+    <h1>Registrar usuario</h1>
+    <form action="/api/sessions/register" method="post" >
+        <label>Email</label>
+        <input name="email" type="email" required> {{!-- A04 Insecure Design --}}
+        <label>Password</label>
+        <input name="password" type="password" required> {{!-- A04 Insecure Design --}}
+        <button>Enviar</button>
+    </form>
+</div>
