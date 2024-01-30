@@ -1,0 +1,134 @@
+paths:
+  /api/users/:
+    get:
+      summary: Listar usuarios
+      tags:
+        - Users
+      responses:
+        200:
+          description: Los usuarios fueron obtenidos exitosamente desde la base de datos.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/User'
+        500:
+          description: Error interno del servidor.
+
+  /api/users/{uid}:
+    get:
+      summary: Permite obtener un usuario por su identificador.
+      tags:
+        - Users
+      parameters:
+        - in: path
+          name: uid
+          required: true
+          description: Identificador del usuario.
+          schema:
+            type: string
+      responses:
+        200:
+          description: Usuario encontrado en la base de datos.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        404:
+          description: Usuario no encontrado.
+        500:
+          description: Error interno del servidor.
+    put:
+      summary: Permite actualizar un usuario por su identificador.
+      tags:
+        - Users
+      parameters:
+        - in: path
+          name: uid
+          required: true
+          description: Identificador del usuario.
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/requestBodies/updateUser'
+      responses:
+        200:
+          description: Usuario actualizado en la base de datos.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        404:
+          description: Usuario no encontrado.
+        500:
+          description: Error interno del servidor.
+
+components:
+  schemas:
+    User:
+      type: object
+      properties:
+        _id:
+          type: string
+          description: Id del usuario generado por mongodb.
+        first_name:
+          type: string
+          description: Nombre del usuario.
+        last_name:
+          type: string
+          description: Apellido del usuario.
+        email:
+          type: string
+          description: Correo electrónico del usuario.
+        password:
+          type: string
+          description: Contraseña del usuario.
+      example:
+        _id: 60f0a9c9e6b3c2b4b8a6b2a0
+        first_name: Juan
+        last_name: Perez
+        email: jp@email.com
+        password: "123456"
+
+  requestBodies:
+    createUser:
+      type: object
+      properties:
+        first_name:
+          type: string
+          description: Nombre del usuario.
+        last_name:
+          type: string
+          description: Apellido del usuario.
+        email:
+          type: string
+          description: Correo electrónico del usuario.
+        password:
+          type: string
+          description: Contraseña del usuario.
+      example:
+        first_name: Juan
+        last_name: Perez
+        email: jp@email.com
+        password: "123456"
+    updateUser:
+      type: object
+      properties:
+        first_name:
+          type: string
+          description: Nombre del usuario.
+        last_name:
+          type: string
+          description: Apellido del usuario.
+        email:
+          type: string
+          description: Correo electrónico del usuario.
+      example:
+        first_name: Juan
+        last_name: Perez
+        email: jp@email.com

@@ -1,0 +1,131 @@
+paths:
+  /api/pets:
+    get:
+      summary: Obtiene todas las mascotas
+      tags:
+        - Pets
+      responses:
+        200:
+          description: Mascotas obtenidas
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Pet'
+        500:
+          description: Error interno del servidor
+    post:
+      summary: Crea una mascota
+      tags:
+        - Pets
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/requestBodies/createPet'
+      responses:
+        200:
+          description: Mascota creada
+        400:
+          description: Error en los datos enviados
+        500:
+          description: Error interno del servidor
+
+  /api/pets/{pid}:
+    put:
+      summary: Actualiza una mascota por su ID
+      tags:
+        - Pets
+      parameters:
+        - in: path
+          name: pid
+          required: true
+          description: ID de la mascota
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/requestBodies/createPet'
+      responses:
+        200:
+          description: Mascota actualizada
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Pet'
+        404:
+          description: Mascota no encontrada
+        500:
+          description: Error interno del servidor
+    delete:
+      summary: Elimina una mascota por su ID
+      tags:
+        - Pets
+      parameters:
+        - in: path
+          name: pid
+          required: true
+          description: ID de la mascota
+          schema:
+            type: string
+      responses:
+        200:
+          description: Mascota eliminada
+        404:
+          description: Mascota no encontrada
+        500:
+          description: Error interno del servidor
+    
+components:
+  schemas:
+    Pet:
+      type: object
+      properties:
+        _id:
+          type: string
+          description: ID de la mascota
+        name:
+          type: string
+          description: Nombre de la mascota
+        specie:
+          type: string
+          description: Especie de la mascota
+        birthDate:
+          type: string
+          description: Fecha de nacimiento de la mascota
+        image:
+          type: string
+          description: Imagen de la mascota
+      example:
+        _id: 60b9b0c9e6c9a40015f1b0a5
+        name: Firulais
+        specie: Perro
+        birthDate: 2021-06-04T00:00:00.000Z
+        image: https://images.dog.ceo/breeds/terrier-norwich/n02094258_1003.jpg
+
+  requestBodies:
+    createPet:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Nombre de la mascota
+        specie:
+          type: string
+          description: Especie de la mascota
+        birthDate:
+          type: string
+          description: Fecha de nacimiento de la mascota
+        image:
+          type: string
+          description: Imagen de la mascota
+      example:
+        name: Firulais
+        specie: Perro
+        birthDate: 2021-06-04T00:00:00.000Z
+        image: https://images.dog.ceo/breeds/terrier-norwich/n02094258_1003.jpg

@@ -1,0 +1,102 @@
+paths:
+  /api/adoptions:
+    get:
+      summary: Obtiene todas las adopciones
+      tags:
+        - Adoptions
+      responses:
+        200:
+          description: Adopciones obtenidas
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Adoption'
+        500:
+          description: Error interno del servidor
+
+  /api/adoptions/{aid}:
+    get:
+      summary: Obtiene una adopción por su ID
+      tags:
+        - Adoptions
+      parameters:
+        - in: path
+          name: aid
+          required: true
+          description: ID de la adopción
+          schema:
+            type: string
+      responses:
+        200:
+          description: Adopción obtenida
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Adoption'
+        500:
+          description: Error interno del servidor
+
+  /api/adoptions/{uid}/{pid}:
+    post:
+      summary: Crea una adopción
+      tags:
+        - Adoptions
+      parameters:
+        - in: path
+          name: uid
+          required: true
+          description: ID del dueño
+          schema:
+            type: string
+        - in: path
+          name: pid
+          required: true
+          description: ID de la mascota
+          schema:
+            type: string
+      responses:
+        200:
+          description: Adopción creada
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Adoption'
+        400:
+          description: Error en los datos enviados
+        500:
+          description: Error interno del servidor
+
+components:
+  schemas:
+    Adoption:
+      type: object
+      properties:
+        _id:
+          type: string
+          description: ID de la adopción
+        owner:
+          type: string
+          description: ID del dueño
+        pet:
+          type: string
+          description: ID de la mascota
+      example:
+        _id: 5f9d4b7b9c9d6b2b1c7d7b7b
+        owner: 5f9d4b7b9c9d6b2b1c7d7b7b
+        pet: 5f9d4b7b9c9d6b2b1c7d7b7b
+
+  requestBodies:
+    createAdoption:
+      type: object
+      properties:
+        owner:
+          type: string
+          description: ID del dueño
+        pet:
+          type: string
+          description: ID de la mascota
+      example:
+        owner: 5f9d4b7b9c9d6b2b1c7d7b7b
+        pet: 5f9d4b7b9c9d6b2b1c7d7b7b
