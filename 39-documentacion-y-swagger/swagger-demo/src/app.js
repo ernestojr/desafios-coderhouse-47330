@@ -14,7 +14,7 @@ import __dirname from './utils/index.js';
 
 const app = express();
 const PORT = process.env.PORT||8080;
-const connection = mongoose.connect('MONGODB_URI')
+const connection = mongoose.connect('mongodb+srv://developer:QmSQ489uyGo2WqJk@cluster0.beaz15s.mongodb.net/pets')
 
 app.use(express.json());
 app.use(cookieParser());
@@ -32,7 +32,7 @@ const swaggerOptions = {
 
 const specs = swaggerJsDoc(swaggerOptions);
 
-app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(specs))
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(specs));
 
 app.use('/api/users',usersRouter);
 app.use('/api/pets',petsRouter);

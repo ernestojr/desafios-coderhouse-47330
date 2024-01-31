@@ -1,6 +1,7 @@
 (function() {
   const requestOptions = {
     method: 'GET',
+    credentials: 'include',
   };
   
   fetch("http://localhost:8080/api/orders/", requestOptions)

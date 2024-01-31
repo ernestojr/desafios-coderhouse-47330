@@ -10,8 +10,12 @@ describe('Pruebas al modulo user dao.', function() {
     await mongoose.connect('mongodb+srv://developer:QmSQ489uyGo2WqJk@cluster0.beaz15s.mongodb.net/adoptme-mocha');
     this.userDao = new UserDao();
   });
-  after(async function() {
+
+  beforeEach(async () => {
     await mongoose.connection.collections.users.drop();
+  });
+  
+  after(async function() {
     await mongoose.connection.close();
   });
 
@@ -26,5 +30,19 @@ describe('Pruebas al modulo user dao.', function() {
     assert.strictEqual(Array.isArray(result.pets), true);
     assert.deepEqual(result.pets, []);
     assert.strictEqual(result.email, 'jr@mail.com');
+  });
+
+  it('Debe obtener por email un usuario de forma exitosa.', async function() {
+    await this.userDao.save({
+      first_name: 'Jose',
+      last_name: 'Rojas',
+      email: 'jr@mail.com',
+      password: 'qwerty',
+    });
+
+    const results = await this.userDao.get({ email: 'jr@mail.com' });
+    assert.strictEqual(Array.isArray(results), true);
+    assert.strictEqual(results.length, 1);
+    assert.ok(results[0]._id);
   });
 });
