@@ -13,23 +13,23 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: kubeecommerce
+  name: ecommerce-app
 spec:
   replicas: 5
   selector:
     matchLabels:
-      app: kubeecommerce
+      app: ecommerce-app
   template:
     metadata:
       labels:
-        app: kubeecommerce
+        app: ecommerce-app
     spec:
       containers:
-        - name: kubeecommerce
+        - name: ecommerce-app
           image: ernestojr/ecommerce:1.0.0
           ports:
             - containerPort: 8080
           env:
             - name: MONGO_URL
-              value: mongodb+srv://developer:EP2dJ1E10aQmWh3H@cluster0.wzpvdnu.mongodb.net/docker-demo
+              value: mongodb+srv://developer:QmSQ489uyGo2WqJk@cluster0.beaz15s.mongodb.net/ecommerce-docker
           imagePullPolicy: Always
