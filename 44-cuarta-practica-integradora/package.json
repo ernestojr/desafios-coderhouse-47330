@@ -1,0 +1,34 @@
+{
+  "name": "server-advanced",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/server.js",
+  "type": "module",
+  "scripts": {
+    "start": "node .",
+    "dev": "nodemon --exec 'node -r dotenv/config' .",
+    "test": "mocha -r dotenv/config --timeout 10000 --exit ./tests/**/*.test.js",
+    "test:units": "mocha -r dotenv/config --timeout 10000 --exit ./tests/units/*.test.js",
+    "test:functionals": "mocha -r dotenv/config --timeout 10000 --exit ./tests/functionals/*.test.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bcrypt": "^5.1.1",
+    "cookie-parser": "^1.4.6",
+    "express": "^4.18.2",
+    "express-handlebars": "^7.1.2",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.0.1",
+    "swagger-jsdoc": "^6.2.8",
+    "swagger-ui-express": "^5.0.0",
+    "winston": "^3.11.0"
+  },
+  "devDependencies": {
+    "chai": "^5.1.0",
+    "dotenv": "^16.3.1",
+    "mocha": "^10.3.0",
+    "nodemon": "^3.0.1",
+    "supertest": "^6.3.4"
+  }
+}

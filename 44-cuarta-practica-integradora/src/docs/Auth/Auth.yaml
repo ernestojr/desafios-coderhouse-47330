@@ -1,0 +1,82 @@
+paths:
+  /api/auth/register:
+    post:
+      summary: Registro de usuario
+      tags:
+        - Auth
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/requestBodies/register'
+      responses:
+        201:
+          description: Usuario registrado con éxito
+        400:
+          description: Invalid data.
+  /api/auth/login:
+    post:
+      summary: Login de usuario
+      tags:
+        - Auth
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/requestBodies/login'
+      responses:
+        200:
+          description: Usuario logeado con éxito
+        401:
+          description: Credenciales invalidas.
+  /api/auth/current:
+    get:
+      summary: Obtener usuario actualmetne logueado
+      tags:
+        - Auth
+      responses:
+        200:
+          description: Usuario obtenido con éxito
+        401:
+          description: No autorizado.
+
+components:
+  requestBodies:
+    register:
+      type: object
+      properties:
+        first_name:
+          type: string
+          description: Nombre del usuario
+        last_name:
+          type: string
+          description: Apellido del usuario
+        email:
+          type: string
+          description: Correo electónico del usuario
+        password:
+          type: string
+          description: Contraseña del usuario
+        birthdate:
+          type: string
+          description: Fecha de nacieminto del usuario (YYYY-MM-DD)
+      example:
+        first_name: Pedro
+        last_name: Pascal
+        email: pedropacal@4fantasticos.com
+        password: qwerty
+        birthdate: 2024-02-15
+    login:
+      type: object
+      properties:
+        email:
+          type: string
+          description: Correo electónico del usuario
+        password:
+          type: string
+          description: Contraseña del usuario
+      example:
+        email: pedropacal@4fantasticos.com
+        password: qwerty
