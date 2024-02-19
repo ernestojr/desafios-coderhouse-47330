@@ -31,4 +31,14 @@ export default class UsersController {
   static deleteById(uid) {
     return UsersService.deleteById(uid);
   }
+
+  static uploadFile(uid, typeFile, file) {
+    const data = {};
+    if (typeFile === 'avatar') {
+      Object.assign(data, { avatar: file.filename });
+    } else {
+      Object.assign(data, { document: file.filename });
+    }
+    return UsersService.updateById(uid, data);
+  }
 }
