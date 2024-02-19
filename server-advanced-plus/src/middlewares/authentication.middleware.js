@@ -17,6 +17,10 @@ export const authToken = async (req, res, next) => {
   if (!accessToken) {
     return next(new UnauthorizedException('Unauthorized 😨.'));
   }
-  req.user = await varifyToken(accessToken);
-  next();
+  try {
+    req.user = await varifyToken(accessToken);
+    next();
+  } catch (error) {
+    next(new UnauthorizedException(error.message));
+  }
 };

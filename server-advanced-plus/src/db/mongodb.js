@@ -1,6 +1,7 @@
 import mongoose from 'mongoose';
 
-import config from '../config/config.js'; 
+import config from '../config/config.js';
+import { logger } from '../config/logger.config.js';
 
 export const init = async () => {
   if (config.persistenceType !== 'mongodb') {
@@ -9,8 +10,8 @@ export const init = async () => {
   try {
     const URI = config.mongodbUri;
     await mongoose.connect(URI);
-    console.log('Database connected 🚀');
+    logger.info('Database connected 🚀');
   } catch (error) {
-    console.error('Error to connect to database', error.message);
+    logger.error('Error to connect to database', error.message);
   }
 };
