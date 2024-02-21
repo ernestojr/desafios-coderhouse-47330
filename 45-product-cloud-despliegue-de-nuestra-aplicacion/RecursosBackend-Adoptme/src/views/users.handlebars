@@ -1,0 +1,18 @@
+<h1>Usuarios</h1>
+
+<table id="main" role="grid">
+  <tr>
+    <th>Nombre</th>
+    <th>Apellido</th>
+    <th>Correo</th>
+    <th>Rol</th>
+  </tr>
+  {{#each users}}
+    <tr>
+      <td>{{this.first_name}}</td>
+      <td>{{this.last_name}}</td>
+      <td>{{this.email}}</td>
+      <td>{{this.role}}</td>
+    </tr>
+  {{/each}}
+</table>

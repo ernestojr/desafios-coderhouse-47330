@@ -1,0 +1,24 @@
+<h1>Mascotas</h1>
+
+<table id="main" role="grid">
+  <tr>
+    <th>Nombre</th>
+    <th>Especie</th>
+    <th>Fec. Nac.</th>
+    <th>Adoptada?</th>
+  </tr>
+  {{#each pets}}
+    <tr>
+      <td>{{this.name}}</td>
+      <td>{{this.specie}}</td>
+      <td>{{this.birthDate}}</td>
+      <td>
+        {{#if this.adopted}}
+          Si
+        {{else}}
+          Aún no
+        {{/if}}
+      </td>
+    </tr>
+  {{/each}}
+</table>
